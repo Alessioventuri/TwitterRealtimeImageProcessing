@@ -1,0 +1,80 @@
+apply plugin: 'java'
+
+repositories {
+    mavenCentral()
+}
+configurations.all {
+  exclude group: 'com.sun.jdmk', module: 'jmxtools'
+  exclude group: 'com.sun.jmx', module: 'jmxri'
+  exclude group: 'javax.jms', module: 'jms'
+}
+dependencies {
+// https://mvnrepository.com/artifact/org.apache.lucene/lucene-core
+	compile group: 'org.apache.lucene', name: 'lucene-core', version: '8.0.0'
+    compile group: 'org.apache.lucene', name: 'lucene-analyzers-common', version: '8.0.0'
+    
+    // https://mvnrepository.com/artifact/org.apache.lucene/lucene-queryparser
+	compile group: 'org.apache.lucene', name: 'lucene-queryparser', version: '8.0.0'
+
+    compile group: 'commons-io', name: 'commons-io', version: '2.6'
+    compile group: 'org.apache.commons', name: 'commons-math3', version: '3.6.1'
+    
+    // https://mvnrepository.com/artifact/com.sangupta/jopensurf
+    compile group: 'com.sangupta', name: 'jopensurf', version: '1.0.0'
+    
+    // https://mvnrepository.com/artifact/org.apache.storm/storm-client
+	compile group: 'org.apache.storm', name: 'storm-client', version: '2.1.0'
+	
+    // https://mvnrepository.com/artifact/org.apache.storm/storm-hbase
+	compile group: 'org.apache.storm', name: 'storm-hbase', version: '2.1.0'
+   	compile group: 'org.apache.storm', name: 'storm-server', version: '2.1.0'
+
+    runtime group: 'com.twelvemonkeys.imageio', name: 'imageio-jpeg', version: '3.3.1'
+    // https://mvnrepository.com/artifact/org.twitter4j/twitter4j-core
+	implementation group: 'org.twitter4j', name: 'twitter4j-core', version: '4.0.4'
+    // https://mvnrepository.com/artifact/org.twitter4j/twitter4j-stream
+	implementation group: 'org.twitter4j', name: 'twitter4j-stream', version: '4.0.4'
+    implementation group: 'org.apache.hbase', name: 'hbase-client', version: '2.2.3'
+    implementation group: 'org.apache.hbase', name: 'hbase-mapreduce', version: '2.2.3'
+
+    compile fileTree(dir: 'lib', include: '*.jar')
+}
+
+
+task buildJar(type: Jar) {
+	zip64=true
+    manifest {
+        attributes(
+                'Implementation-Version': project.version            
+        )
+    }
+    classifier = 'all2'
+    baseName = project.name
+    from { (configurations.compile.findAll{!it.path.endsWith(".pom")}).collect { it.isDirectory() ? it : zipTree(it) } }
+
+            {
+                exclude "META-INF/*.SF"
+                exclude "META-INF/*.DSA"
+                exclude "META-INF/*.RSA"
+                exclude "META-INF/*.dsa"
+                exclude "META-INF/*.rsa"
+                exclude "META-INF/*.EC"
+                exclude "META-INF/*.ec"
+                exclude "META-INF/MSFTSIG.SF"
+                exclude "META-INF/MSFTSIG.RSA"
+            }
+    with jar
+}
+
+task fatJar(type: Jar) {
+	zip64=true
+    manifest {
+        attributes( 'Implementation-Title': 'Gradle Jar File Example',  
+        	'Implementation-Version': project.version
+        	)
+    }
+    baseName = project.name + '-all'
+    from { (configurations.compile.findAll{!it.path.endsWith(".pom")}).collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
+

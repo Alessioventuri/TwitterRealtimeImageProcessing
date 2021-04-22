@@ -30,3 +30,6 @@ Start in this order:
 After that, you can finally execute in this order:
 * `TwitterRealTimeImageProcessing.java`
 * `HadoopDriver.java`
+
+#Tips
+This whole project was executed on Ubuntu 20.04.2 LTS 

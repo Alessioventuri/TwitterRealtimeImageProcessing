@@ -5,6 +5,7 @@ Lambda Architecture implementation using Apache Storm, Hadoop and HBase to perfo
 The goal of this project is find the most representative images from images obtained from Twitter through a certain keyword.\
 To find these representative images, we will use the K-Means algorithm.
 
+Link to the whole [paper](Parallel_Computing_Main_final.pdf)
 
 ### Dependencies
   * [Apache Hadoop-3.2.1](https://hadoop.apache.org/)

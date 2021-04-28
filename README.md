@@ -29,6 +29,7 @@ Start in this order:
 
 After that, you can finally execute in this order:
 * `TwitterRealTimeImageProcessing.java`
+  *
 * `HadoopDriver.java`
 
 ### Tips

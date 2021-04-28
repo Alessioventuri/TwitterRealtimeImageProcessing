@@ -31,6 +31,8 @@ After that, you can finally execute in this order:
 * `TwitterRealTimeImageProcessing.java`
   * insert the keyword inside the arguments list
 * `HadoopDriver.java`
+  * Choose the correct value as number of center, threshold and a file where to write the centers. 
+  * With CEDD Descriptor, we obtain a 144-dimensional vector. 
 
 ### Tips
 This whole project was executed on Ubuntu 20.04.2 LTS 

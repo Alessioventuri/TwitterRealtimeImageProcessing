@@ -108,17 +108,19 @@ public class DatabaseUtils{
 			c.setPath(new Text(nearest));
 		}
 		for (int i = 0; i < centers.size(); i++) {			
-			addRecord(table, "center" + i, "content", "featureVector","nearestPath",centers.get(i));
+			addRecord(table, "center" + i, "content", "featureVector","nearestPath","numberOfPoints",centers.get(i));
 		}
 	}
 
 	public static void addRecord(Table table, String rowKey, String family,
-			String qualifier,String qualifier_1, Center c) throws IOException {
+			String qualifier,String qualifier_1,String qualifier_2, Center c) throws IOException {
 		Put put = new Put(Bytes.toBytes(rowKey));
 		put.addColumn(Bytes.toBytes(family), Bytes.toBytes(qualifier_1),
 				Bytes.toBytes(c.getPath().toString()));
 		put.addColumn(Bytes.toBytes(family), Bytes.toBytes(qualifier),
 				Bytes.toBytes(Arrays.toString(c.getListOfFeaturesDouble())));
+		put.addColumn(Bytes.toBytes(family), Bytes.toBytes(qualifier_2),
+				Bytes.toBytes(new String(""+c.getNumberOfPoints().get())));
 		table.put(put);
 	}
 

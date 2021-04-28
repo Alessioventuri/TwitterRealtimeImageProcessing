@@ -106,6 +106,7 @@ public class HadoopDriver extends Configured implements Tool{
 
 
 		System.out.println("Number of iterations\t" + iterations);
+		
 		System.out.println("\n\nStart: " + start + "\n\n");
 
 		int returnValue = job.waitForCompletion(true) ? 0 : 1;
@@ -115,6 +116,7 @@ public class HadoopDriver extends Configured implements Tool{
 		System.out.println("\n\nEnd: " + end);
 		long elapsed = end - start;
 		System.out.println("\n\nElapsed: " + elapsed);
+		ShowGeneratedHtml.show("tweet_batch_view");
 		System.out.println(PointsCounter.points.size());
 		table.put(new Put(Bytes.toBytes("MapReduce_end_timestamp"))
 				.addColumn(Bytes.toBytes("placeholder"), Bytes.toBytes(""), Bytes.toBytes("")));
@@ -135,7 +137,7 @@ public class HadoopDriver extends Configured implements Tool{
 		for( Center center : kCenters) {
 			tempC = new Center(center);
 			centerWriter.append(new IntWritable(i), tempC);
-			DatabaseUtils.addRecord(table, "center" + i, "content", "featureVector","nearestPath", tempC); 
+			DatabaseUtils.addRecord(table, "center" + i, "content", "featureVector","nearestPath","numberOfPoints", tempC); 
 			i++;
 		}
 		centerWriter.close();

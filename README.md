@@ -36,6 +36,6 @@ After that, you can finally execute in this order:
   * If you want change descriptor, change also `FeatureExtractorCEDD.java` and all corrispondences.
   
 At the end of kmeans, an HTLM page will show the results obtained
-![Store](html.png)
+[html view](html view.png)
 ### Tips
 This whole project was executed on Ubuntu 20.04.2 LTS 

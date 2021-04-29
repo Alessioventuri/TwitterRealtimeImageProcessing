@@ -34,7 +34,8 @@ After that, you can finally execute in this order:
   * Choose the correct value as number of center, threshold and a file where to write the centers. 
   * With CEDD Descriptor, we obtain a 144-dimensional vector. 
   * If you want change descriptor, change also `FeatureExtractorCEDD.java` and all corrispondences.
-
-At the end of kmeans, an HTLM page will show the results obtained.
+  
+At the end of kmeans, an HTLM page will show the results obtained
+![Store](html.png)
 ### Tips
 This whole project was executed on Ubuntu 20.04.2 LTS 
